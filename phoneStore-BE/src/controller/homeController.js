@@ -1,6 +1,11 @@
 import userservice from "../service/userservice";
 
 const homePage = async (req, res) => {
+
+    res.cookie("Test", "test cookie")
+
+    console.log('Cookies: ', req.cookies)
+
     let userList = await userservice.getListUsers();
     return res.render("home.ejs", { userList });
 }
@@ -9,8 +14,9 @@ const handleCreateUser = async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     let username = req.body.username;
+    let groupId = req.body.groupId;
 
-    await userservice.createNewUser(email, password, username);
+    await userservice.createNewUser(email, password, username, groupId);
     return res.redirect("/")
 }
 

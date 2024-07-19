@@ -1,0 +1,33 @@
+.paginate {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.modal-user {
+    .red {
+        color: red;
+    }
+}
+
+.action {
+    margin: 20px;
+
+    .refresh {
+        margin-right: 10px;
+    }
+}
+
+.edit {
+    color: orange;
+    cursor: pointer;
+    padding-right: 20px;
+    font-size: 20px;
+}
+
+
+.delete {
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+}
