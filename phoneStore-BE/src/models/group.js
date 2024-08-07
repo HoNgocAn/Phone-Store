@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Group.hasMany(models.User);
-      Group.belongsToMany(models.Role, { through: "Group_Role" });
+      Group.hasMany(models.User, { foreignKey: 'groupId' });
+      Group.belongsToMany(models.Role, { through: "Group_Role", foreignKey: 'groupId' });
     }
   }
   Group.init({
@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Group',
-    tableName: "Group"
   });
   return Group;
 };

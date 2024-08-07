@@ -23,3 +23,54 @@
     }
 
 }
+
+.nav-header {
+    .nav {
+        background-color: #20232a;
+    }
+
+    a,
+    .nav-link {
+        color: white !important;
+        position: relative;
+        display: inline-block;
+
+        &:hover {
+            color: rgb(45, 202, 202) !important;
+        }
+
+
+    }
+
+    .cart-nav {
+
+        position: relative;
+        display: inline-block;
+
+        i {
+            font-size: 25px;
+            margin-top: 7px;
+
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 13px;
+        }
+
+    }
+
+    .dropdown-menu {
+        a {
+            color: #212529 !important;
+        }
+
+    }
+
+}

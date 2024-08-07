@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { BrowserRouter } from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
+import { UserProvider } from './context/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    <UserProvider >
+      <App />
+    </UserProvider >
   </BrowserRouter>
 );
 

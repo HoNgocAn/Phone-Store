@@ -89,15 +89,18 @@ const loginUser = async (rawData) => {
                 EC: 1
             };
         }
+
+
         // Kiểm tra mật khẩu
         let isCorrectPassword = checkPassword(rawData.password, user.password);
         if (isCorrectPassword) {
 
             let group = await getGroupWithRoles(user);
             let payload = {
+                id: user.id,
                 email: user.email,
                 group,
-                expiresIn: process.env.JWT_EXPRIES_IN
+                username: user.username,
             }
 
             let token = createJWT(payload)
@@ -106,7 +109,10 @@ const loginUser = async (rawData) => {
                 EC: 0,
                 DT: {
                     access_token: token,
-                    data: group
+                    group,
+                    email: user.email,
+                    username: user.username,
+                    id: user.id
                 }
             };
         } else {

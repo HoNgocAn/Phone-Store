@@ -3,7 +3,7 @@ import { getListGroup } from "../service/groupApiService";
 
 const handleGetListGroup = async (req, res) => {
     try {
-
+        
         let data = await getListGroup();
 
         return res.status(200).json({

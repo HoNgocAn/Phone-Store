@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Login.scss";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from "../../services/userService";
 import { toast } from 'react-toastify';
+import { UserContext } from "../../context/UserContext";
 
 function Login() {
+
+    const { login } = useContext(UserContext);
+
 
     const [valueLogin, setValueLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -44,13 +48,21 @@ function Login() {
         let response = await loginUser(userData);
         if (response && +response.EC === 0) {
             toast.success("Login successfully");
+            let id = response.DT.id;
+            let group = response.DT.group;
+            let email = response.DT.email;
+            let username = response.DT.username;
+            let token = response.DT.access_token;
 
             let data = {
                 isAuthenticated: true,
-                token: "fake token"
+                token: token,
+                account: { id, group, email, username }
             }
-            sessionStorage.setItem("account", JSON.stringify(data));
-            navigate("/user");
+
+            sessionStorage.setItem("jwt", token);
+            login(data)
+            navigate("/dashboard");
             // window.location.reload();
 
         } else {
@@ -67,7 +79,7 @@ function Login() {
 
 
     useEffect(() => {
-        let session = sessionStorage.getItem("account");
+        let session = sessionStorage.getItem("jwt");
         if (session) {
             navigate("/");
             window.location.reload();

@@ -33,16 +33,16 @@ function ModalDeleteUser({ userId, fetchAllUser, currentPage, setCurrentPage, se
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Xóa người dùng</h1>
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Delete User</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            Bạn có chắc chắn muốn xóa {userName} không  ?
+                            Are you sure you want to delete {userName}?
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={() => handleDeleteUser()}>Xác nhận</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={() => handleDeleteUser()}>Confirm</button>
                         </div>
                     </div>
                 </div>

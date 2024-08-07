@@ -1,0 +1,36 @@
+.role-container {
+    div {
+        text-align: left;
+    }
+
+    .actions {
+        i {
+            font-size: 25px;
+            padding-top: 15px;
+            padding-right: 15px;
+            cursor: pointer;
+        }
+
+        .add-role {
+            color: green;
+        }
+
+        .delete-role {
+            color: red;
+        }
+
+    }
+}
+
+.delete-role {
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.edit-role {
+    color: orange;
+    cursor: pointer;
+    padding-right: 20px;
+    font-size: 20px;
+}

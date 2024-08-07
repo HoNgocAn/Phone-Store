@@ -31,3 +31,32 @@
     cursor: pointer;
     font-size: 20px;
 }
+
+
+/* Users.scss hoặc file CSS tương ứng */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    /* Căn giữa theo cột */
+    justify-content: center;
+    /* Căn giữa theo trục dọc */
+    align-items: center;
+    /* Căn giữa theo trục ngang */
+    height: 100vh;
+    /* Đảm bảo container có chiều cao của viewport */
+    width: 100%;
+    /* Chiều rộng của container */
+}
+
+.loading-container .loading {
+    margin-bottom: 10px;
+    /* Khoảng cách giữa spinner và văn bản */
+}
+
+.loading-container div {
+    margin: 10px;
+}
+
+.input-search-product {
+    width: 100%;
+}

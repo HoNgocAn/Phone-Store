@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.belongsTo(models.Group);
-      User.belongsToMany(models.Project, { through: "Project_User" });
+      User.belongsTo(models.Group, { foreignKey: 'groupId' });
+      User.hasMany(models.Order, { foreignKey: 'userId' });
     }
   }
   User.init({
@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
-    tableName: "User"
   });
   return User;
 };

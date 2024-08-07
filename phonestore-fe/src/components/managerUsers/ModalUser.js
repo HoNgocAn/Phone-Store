@@ -111,35 +111,35 @@ const ModalUser = (props) => {
                             <label>Email (<span className="red" >*</span>) </label>
                             <input className="form-control" type="email" placeholder="Enter Email" value={userData.email}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "email")} />
-                            {!validInput.email && <span className="text-danger">Email không được để trống</span>}
+                            {!validInput.email && <span className="text-danger">Email can't be left blank</span>}
                         </div>
                         <div className="col-12 col-sm-6 form-group">
                             <label>Phone Number (<span className="red" >*</span>) </label>
                             <input className="form-control" type="text" placeholder="Enter phone number" value={userData.phone}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "phone")}
                             />
-                            {!validInput.phone && <span className="text-danger">Phone không được để trống</span>}
+                            {!validInput.phone && <span className="text-danger">Phone can't be left blank</span>}
                         </div>
                         <div className="col-12 col-sm-6 form-group">
                             <label>User Name : </label>
                             <input className="form-control" type="text" placeholder="Enter user name" value={userData.username}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "username")}
                             />
-                            {!validInput.username && <span className="text-danger">Username không được để trống</span>}
+                            {!validInput.username && <span className="text-danger">Username can't be left blank</span>}
                         </div>
                         <div className="col-12 col-sm-6 form-group">
                             <label>Password (<span className="red" >*</span>) </label>
                             <input className="form-control" type="password" placeholder="Enter Password" value={userData.password}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "password")}
                             />
-                            {!validInput.password && <span className="text-danger">Password không được để trống</span>}
+                            {!validInput.password && <span className="text-danger">Password can't be left blank</span>}
                         </div>
                         <div className="col-12 col-sm-12 form-group">
                             <label>Address:</label>
                             <input className="form-control" type="text" placeholder="Enter Address" value={userData.address}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "address")}
                             />
-                            {!validInput.address && <span className="text-danger">Address không được để trống</span>}
+                            {!validInput.address && <span className="text-danger">Address can't be left blank</span>}
                         </div>
                         <div className="col-12 col-sm-6 form-group">
                             <label>Gender: </label>
@@ -147,7 +147,7 @@ const ModalUser = (props) => {
                                 <option defaultValue="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                            {!validInput.sex && <span className="text-danger">Gender không được để trống</span>}
+                            {!validInput.sex && <span className="text-danger">Gender can't be left blank</span>}
                         </div>
                         <div className="col-12 col-sm-6 form-group">
                             <label>Group (<span className="red">*</span>) </label>
@@ -158,9 +158,9 @@ const ModalUser = (props) => {
                                     ))}
                                 </select>
                             ) : (
-                                <p>Không tìm thấy dữ liệu</p>
+                                <p>No data found</p>
                             )}
-                            {!validInput.groupId && <span className="text-danger">Group không được để trống</span>}
+                            {!validInput.groupId && <span className="text-danger">Group can't be left blank</span>}
                         </div>
                     </div>
                 </Modal.Body>

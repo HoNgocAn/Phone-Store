@@ -2,18 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Group_Role', {
+    await queryInterface.createTable('Order_Detail', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groupId: {
+      price: {
+        type: Sequelize.DECIMAL
+      },
+      quantity: {
         type: Sequelize.INTEGER
       },
-      roleId: {
-        type: Sequelize.INTEGER
+      subtotal: {
+        type: Sequelize.DECIMAL
+      },
+      orderId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Order',
+          key: 'id'
+        },
+      },
+      productId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Product',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Group_Role');
+    await queryInterface.dropTable('Order_Detail');
   }
 };

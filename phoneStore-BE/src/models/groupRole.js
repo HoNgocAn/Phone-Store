@@ -14,11 +14,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   GroupRole.init({
-    groupId: DataTypes.INTEGER,
-    roleId: DataTypes.INTEGER,
+    groupId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Group',
+        key: 'id'
+      }
+    },
+    roleId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Role',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'GroupRole',
+    tableName: 'Group_Role'
   });
   return GroupRole;
 };

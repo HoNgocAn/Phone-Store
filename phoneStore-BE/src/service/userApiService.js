@@ -1,17 +1,33 @@
 import db from "../models/index";
 import bcrypt from "bcrypt";
+import { Op } from 'sequelize';
 
 const salt = bcrypt.genSaltSync(10);
 
 
-const getListUsers = async (page, limit) => {
+const getListUsers = async (page, limit, nameSearch, groupId) => {
     try {
         let offset = (page - 1) * limit
+
+        const whereConditions = {
+            username: {
+                [Op.like]: `%${nameSearch}%`
+            }
+        };
+
+        // Chỉ thêm điều kiện groupId nếu groupId có giá trị
+        if (groupId) {
+            whereConditions.groupId = {
+                [Op.eq]: groupId
+            };
+        }
+
         const { count, rows } = await db.User.findAndCountAll({
             attributes: ["id", "username", "email", "phone", "sex", "address", "groupId"],
             include: {
                 model: db.Group, attributes: ["id", "name"],
             },
+            where: whereConditions,
             offset: offset,
             limit: limit
         });
@@ -25,18 +41,19 @@ const getListUsers = async (page, limit) => {
         }
 
         if (data) {
-            return {
+            return ({
                 EM: "Get list user successful",
                 EC: 0,
                 DT: data
-            }
+            });
         } else {
-            return {
+            return ({
                 EM: "Get list user successful",
                 EC: 0,
                 DT: []
-            }
+            });
         }
+
     } catch (error) {
         console.log(error);
     }
@@ -126,6 +143,7 @@ const deleteUser = async (id) => {
 
 const getUserById = async (id) => {
     let data = {};
+
     try {
         data = await db.User.findOne({ where: { id: id } });
         if (data) {
@@ -178,6 +196,34 @@ const updateUser = async (data) => {
 
 }
 
+const changePassword = async (password, id) => {
+    try {
+        // Hash mật khẩu trước khi cập nhật
+        const hashPass = bcrypt.hashSync(password, salt);
+        // Cập nhật thông tin người dùng trong cơ sở dữ liệu
+
+        await db.User.update(
+            { password: hashPass },
+            {
+                where: {
+                    id: id,
+                },
+            },
+        );
+
+        return {
+            EM: "Change password successful",
+            EC: 0,
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "Change password failed",
+            EC: -1,
+        };
+    }
+}
+
 module.exports = {
-    createNewUser, getListUsers, deleteUser, getUserById, updateUser
+    createNewUser, getListUsers, deleteUser, getUserById, updateUser, changePassword
 }
