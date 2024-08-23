@@ -87,10 +87,10 @@ function Register(props) {
                 <div className='row'>
                     <div className='register-left col-12 d-none col-sm-7 d-sm-block d-flex flex-column align-items-center '>
                         <div className='brand'>
-                            <h3>Facebook</h3>
+                            <h3>PHONE-STORE</h3>
                         </div>
                         <div className='detail'>
-                            <p>Facebook helps you connect and share with the people in your life</p>
+                            <p> THIS IS A PLACE TO HELP YOU BUY THE BEST PHONES AT THE RIGHT PRICE</p>
                         </div>
                     </div>
                     <div className='register-right col-sm-5 col-12 d-flex flex-column py-3 '>

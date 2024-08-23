@@ -1,0 +1,22 @@
+.footer {
+    .row-1 {
+        text-align: left;
+    }
+
+    .row-2 {
+        text-align: left;
+
+        .icon-footer {
+            font-size: 25px;
+            color: white;
+            margin: 1%;
+
+        }
+
+        .text-icon {
+            color: white;
+            margin-left: 10px;
+            font-size: 15px;
+        }
+    }
+}

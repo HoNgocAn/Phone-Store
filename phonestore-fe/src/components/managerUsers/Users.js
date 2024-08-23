@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { fetchAllUser } from "../../services/userService";
-import ReactPaginate from 'react-paginate';
 import "./Users.scss";
 import { useNavigate, useLocation } from 'react-router-dom';
 import ModalDeleteUser from "./ModalDeleteUser";
@@ -65,7 +64,6 @@ function Users() {
         changeIsLoadingUser(true)
     }
     const getAllUsers = async (page, nameSearch, groupId) => {
-        console.log("hello");
         try {
             let rs = await fetchAllUser(page, nameSearch, groupId);
 
@@ -99,11 +97,12 @@ function Users() {
     }
 
     const handleRefresh = () => {
-        navigate("/")
+        window.location.reload()
     }
 
     const refreshPage = () => {
         getAllUsers(currentPage);
+        window.location.reload()
     }
 
     const submitSearch = async () => {
@@ -135,10 +134,6 @@ function Users() {
             navigate("/error404");
         }
     };
-
-
-    console.log("check >>>", groupId);
-
 
 
     return (
@@ -225,7 +220,7 @@ function Users() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5">Không tìm thấy dữ liệu</td>
+                                    <td colSpan="5" className="text-danger">No data</td>
                                 </tr>
                             )}
                         </tbody>

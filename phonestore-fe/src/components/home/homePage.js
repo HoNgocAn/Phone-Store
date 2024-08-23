@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { fetchAllProduct } from "../../services/productService";
-import ReactPaginate from 'react-paginate';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from "../../context/UserContext";
-import "./HomePage.scss";
+import "./HomePage.scss"
 import Pagination from "../other/Pagination";
+import CarouselHome from "../other/CarouselHome";
 
 
 function HomePage(props) {
@@ -52,66 +52,86 @@ function HomePage(props) {
     let session = sessionStorage.getItem("jwt")
 
 
+    const isLocalImageURL = (url) => {
+        return url.startsWith('http');
+    };
+
+    const toAbsoluteURL = (url) => {
+        return `http://localhost:8080/images/${url}`;
+    };
+
     return (
-        <div className='container mt-3'>
-            <h1>Đây là Trang Home</h1>
+        <>
+            <div className="slick-slider" >
+                <CarouselHome />
+            </div>
 
-            <div className="row row-1-home ">
-                {listProducts && listProducts.length > 0 ? (
-                    listProducts.map(item =>
-                        <div key={item.id} className="col-12 col-lg-4 mt-4">
-                            <div className="card" style={{ width: "300px" }}>
-                                <img className="card-img-top" src={item.image} alt="Card image"
-                                    height="300"
-                                    width="100" />
-                                <div className="card-body">
-                                    <h5 className="card-text">{item.name}</h5>
-                                    <p className="card-text">Price: {item.price} USD </p>
-                                    <p className="card-text">Quantity: {item.quantity}</p>
-                                    <Link to={`/product/detail/${item.id}`}>
-                                        <span className="item-detail" ><i className="fa fa-eye" ></i></span>
-                                    </Link>
-                                    {!session ?
-                                        <span className="item-cart" data-bs-toggle="modal"
-                                            data-bs-target="#logineUser"><i className="fa fa-cart-plus"></i></span>
+            <div className='container mt-3'>
+                <div style={{ marginBottom: "20px" }} >
 
-                                        :
-                                        <span className="item-cart" onClick={() => addToCart(item)} ><i className="fa fa-cart-plus"></i></span>
-                                    }
-                                    <div className="modal fade" id="logineUser" tabIndex="-1" aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Login User</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    You must be logged in to place an order!
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={() => handleLogin()}>Login</button>
+                </div>
+
+                <div className="title-home">
+                    <h3>Here is a list of our phones</h3>
+                    <h3> Please choose the phone you like!</h3>
+                </div>
+
+                <div className="row row-1-home ">
+                    {listProducts && listProducts.length > 0 ? (
+                        listProducts.map(item =>
+                            <div key={item.id} className="col-12 col-lg-3 mt-3">
+                                <div className="card" style={{ width: "300px" }}>
+                                    <img className="card-img-top" src={isLocalImageURL(item.image) ? item.image : toAbsoluteURL(item.image)} alt="Card image"
+                                        height="300"
+                                        width="100" />
+                                    <div className="card-body">
+                                        <h5 className="card-text">{item.name}</h5>
+                                        <p className="card-text">Price: {item.price} USD </p>
+                                        <p className="card-text">Quantity: {item.quantity}</p>
+                                        <Link to={`/detail-product/${item.id}`}>
+                                            <span className="item-detail" ><i className="fa fa-eye" ></i></span>
+                                        </Link>
+                                        {!session ?
+                                            <span className="item-cart" data-bs-toggle="modal"
+                                                data-bs-target="#logineUser"><i className="fa fa-cart-plus"></i></span>
+
+                                            :
+                                            <span className="item-cart" onClick={() => addToCart(item)} ><i className="fa fa-cart-plus"></i></span>
+                                        }
+                                        <div className="modal fade" id="logineUser" tabIndex="-1" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Login User</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        You must be logged in to place an order!
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={() => handleLogin()}>Login</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                ) : (
-                    <h5 style={{ color: "red" }}>Không tìm thấy dữ liệu</h5>
-                )}
+                        )
+                    ) : (
+                        <h5 style={{ color: "red" }}>No Data</h5>
+                    )}
+                </div>
+                <div className="paginate">
+                    {totalPages > 1 && (
+                        <Pagination handlePageClick={handlePageClick} totalPages={totalPages} />
+                    )}
+                </div>
             </div>
-            <div className="paginate">
-                {totalPages > 1 && (
-                    <Pagination handlePageClick={handlePageClick} totalPages={totalPages} />
-                )}
-            </div>
-
-        </div>
+        </>
     );
 }
 

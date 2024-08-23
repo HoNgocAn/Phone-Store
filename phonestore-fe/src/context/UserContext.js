@@ -26,10 +26,16 @@ const UserProvider = ({ children }) => {
 
     const [cartCount, setCartCount] = useState(0);
     const [cartItems, setCartItems] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
 
     const setCartNumber = (value) => {
         setCartCount(value)
     }
+
+    const changeNumberTotalAmount = (value) => {
+        setTotalAmount(value)
+    }
+
 
 
     useEffect(() => {
@@ -64,11 +70,13 @@ const UserProvider = ({ children }) => {
 
             setCartCount(userCartCount ? JSON.parse(userCartCount) : 0);
             setCartItems(userCartItems ? JSON.parse(userCartItems) : []);
+
         } else {
             setCartCount(0);
             setCartItems([]);
         }
     }, [user]);
+
 
     // Hàm để thêm sản phẩm vào giỏ hàng
     const addToCart = (product) => {
@@ -141,7 +149,7 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ user, listProducts, login, logout, isLoadingUser, changeIsLoadingUser, cartCount, setCartNumber, addToCart, cartItems, setCartItems, changeIsPayment, isPaymentSuccess }}>
+        <UserContext.Provider value={{ user, listProducts, login, logout, isLoadingUser, changeIsLoadingUser, cartCount, setCartNumber, addToCart, cartItems, setCartItems, changeIsPayment, isPaymentSuccess, changeNumberTotalAmount, totalAmount }}>
             {children}
         </UserContext.Provider>
     );

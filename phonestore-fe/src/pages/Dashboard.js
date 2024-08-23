@@ -17,7 +17,7 @@ function Dashboard() {
 
     useEffect(() => {
         if (groupName) {
-            if (groupName.includes("customer" || "employee")) {
+            if (groupName.includes("customer") || groupName.includes("employee")) {
                 navigate("/");
             } else if (groupName.includes("admin")) {
                 navigate("/user");

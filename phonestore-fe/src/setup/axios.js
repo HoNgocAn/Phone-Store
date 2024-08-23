@@ -2,6 +2,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 // Set config defaults when creating the instance
+
+
+
 const instance = axios.create({
     baseURL: 'http://localhost:8080'
 });
@@ -38,6 +41,7 @@ instance.interceptors.response.use(function (response) {
 
         // forbidden (permission related issues)
         case 403: {
+            window.location.href = "/error403";
             toast.error("You don't have permission...")
             return Promise.reject(err);
         }

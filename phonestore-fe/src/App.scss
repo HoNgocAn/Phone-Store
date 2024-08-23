@@ -1,0 +1,21 @@
+.app-header {
+    position: fixed;
+    /* Cố định ở vị trí */
+    top: 0;
+    /* Đặt ở phía trên cùng */
+    left: 0;
+    /* Đặt ở phía bên trái */
+    width: 100%;
+    /* Đảm bảo chiếm toàn bộ chiều rộng */
+    z-index: 1000;
+    /* Đặt z-index để nằm trên các phần tử khác */
+    background-color: #fff;
+    /* Đặt nền để nó nổi bật hơn nếu cần */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Thêm bóng để tạo hiệu ứng nổi bật */
+}
+
+body {
+    padding-top: 50px;
+    /* Điều chỉnh chiều cao này dựa trên chiều cao của .app-header */
+}

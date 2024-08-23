@@ -13,7 +13,6 @@ function NavHeader() {
 
     const { user, logout, cartCount } = useContext(UserContext);
 
-
     const [isShowCPassword, setIsShowPassword] = useState(false)
 
     const [groupName, setGroupName] = useState(null)
@@ -50,7 +49,7 @@ function NavHeader() {
 
     }
 
-    console.log(user);
+
 
     const handleChangePassword = () => {
         setIsShowPassword(true)
@@ -59,7 +58,7 @@ function NavHeader() {
 
     let session = sessionStorage.getItem("jwt")
 
-    if ((user && user.isAuthenticated) || location.pathname === "/" || location.pathname === "/find-product") {
+    if ((user && user.isAuthenticated) || location.pathname === "/" || location.pathname === "/find-product" || location.pathname.startsWith("/detail-product")) {
         return (
             <>
                 <div className='nav-header'>
@@ -81,6 +80,14 @@ function NavHeader() {
                                     }
                                 </Nav>
                                 <Nav>
+                                    {(groupName === "admin" || groupName === "employee") && session ?
+                                        <div>
+                                            <NavLink to="/add-product" className='nav-link'>Add Product</NavLink>
+                                        </div>
+                                        :
+                                        <></>
+                                    }
+
                                     <NavLink to="/find-product" className='nav-link'>Find Product</NavLink>
                                     <Nav className='cart-nav'>
                                         <span title="cart" className="edit" onClick={() => handleCartPage()}><i className="fa fa-shopping-cart"></i></span>

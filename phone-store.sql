@@ -28,4 +28,15 @@ VALUES
 ('Oppo Find X5 Pro', 1099.99, 18, 'https://cdn.mobilecity.vn/mobilecity-vn/images/2022/04/w300/oppo-find-x5-pro-trang.jpg.webp', 'China'),
 ('Huawei P50 Pro', 899.99, 22, 'https://cdn.tgdd.vn/Products/Images/42/226196/huawei-p50-pro-600x600.jpg', 'China'),
 ('Asus ROG Phone 6', 1199.99, 12, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIEXajchCaJ1UrGUOJJ5r3vcALiCIgUC3Asg&s', 'Taiwan'),
-('Nokia X100', 399.99, 35, 'https://mobile4n.com/wp-content/uploads/2022/12/nokia-x100.jpg', 'Finland');
+('Nokia X100', 399.99, 35, 'https://mobile4n.com/wp-content/uploads/2022/12/nokia-x100.jpg', 'Finland'),
+
+('Vivo X80 Pro', 899.99, 28, 'https://cdn.mobilecity.vn/mobilecity-vn/images/2022/04/w300/vivo-x80-pro-orange.jpg.webp', 'China'),
+('Realme GT 2 Pro', 749.99, 32, 'https://cdn.tgdd.vn/Products/Images/42/258167/realme-gt-2-pro-050122-080902-600x600.jpg', 'China'),
+('Motorola Edge 30 Ultra', 999.99, 26, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_d0EYNEBVDM59K-P-E5p4hEsF8vVj8Q5YbQ&s', 'USA'),
+('LG Velvet', 699.99, 20, 'https://cdn.tgdd.vn/Products/Images/42/220882/600-lg-velvet-600x600.jpg', 'South Korea'),
+('ZTE Axon 30 Ultra', 799.99, 22, 'https://cdn.tgdd.vn/Products/Images/42/243314/zte-axon-30-ultra-600x600.jpg', 'China'),
+('Meizu 18 Pro', 749.99, 18, 'https://mobile4n.com/wp-content/uploads/2022/12/meizu-18-pro.jpg', 'China'),
+('Lenovo Legion Duel 2', 899.99, 16, 'https://cdn.mobilecity.vn/mobilecity-vn/images/2021/04/w300/lenovo-legion-2-pro-8.jpg.webp', 'China'),
+('Black Shark 5 Pro', 699.99, 24, 'https://cdn.tgdd.vn/Products/Images/42/269371/xiaomi-black-shark-5-pro-1-600x600.jpg', 'China'),
+('Honor Magic4 Pro', 999.99, 18, 'https://cdn.mobilecity.vn/mobilecity-vn/images/2022/03/w300/honor-magic-4-vang.jpg.webp', 'China'),
+('Alcatel 3X', 149.99, 50, 'https://www.alcatelmobile.com/wp-content/uploads/2020/04/Alcatel-3X_2020_comp_01_513x599_1-1.png', 'France');

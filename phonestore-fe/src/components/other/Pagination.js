@@ -6,11 +6,11 @@ function Pagination({ handlePageClick, totalPages }) {
         <div>
             <ReactPaginate
                 breakLabel="..."
-                nextLabel="Sau>"
+                nextLabel="Next>"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={3}
                 pageCount={totalPages}
-                previousLabel="<Trước"
+                previousLabel="<Previous"
                 pageClassName="page-item"
                 pageLinkClassName="page-link"
                 previousClassName="page-item"

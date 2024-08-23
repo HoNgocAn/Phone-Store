@@ -33,10 +33,6 @@ const ModalEditUser = (props) => {
     const [validInput, setValidInput] = useState(validInputDefault);
     const [listGroups, setListGroups] = useState([]);
 
-    const handleClose = () => {
-        props.setIsShowModal(false);
-    };
-
     useEffect(() => {
         getAllGroups();
     }, []);
@@ -98,6 +94,11 @@ const ModalEditUser = (props) => {
             toast.error("Error edit user");
         }
     };
+
+    const handleClose = () => {
+        props.setIsShowModal(false);
+    };
+
 
     return (
         <>

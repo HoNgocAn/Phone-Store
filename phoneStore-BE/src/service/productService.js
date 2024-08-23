@@ -74,8 +74,46 @@ const getAllProducts = async () => {
     }
 }
 
+const createNewProduct = async (data) => {
+    try {
+        await db.Product.create(data);
+        return {
+            EM: "Create new product successful",
+            EC: 0,
+        };
+    } catch (error) {
+        console.error("Error creating new product:", error);
+        return {
+            EM: "Failed to create new product",
+            EC: 1,
+        };
+    }
+};
+
+const getProductById = async (id) => {
+    let data = {};
+
+    try {
+        data = await db.Product.findOne({ where: { id: id } });
+        if (data) {
+            return {
+                EM: "get product by id successful",
+                EC: 0,
+                DT: data
+            }
+        } else {
+            return {
+                EM: "get product by id successful",
+                EC: 0,
+                DT: data
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
-    getListProducts, getAllProducts
+    getListProducts, getAllProducts, createNewProduct, getProductById
 }
 

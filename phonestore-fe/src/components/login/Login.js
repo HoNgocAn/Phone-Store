@@ -10,7 +10,6 @@ function Login() {
 
     const { login } = useContext(UserContext);
 
-
     const [valueLogin, setValueLogin] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
@@ -86,16 +85,21 @@ function Login() {
         }
     }, [])
 
+    const handleComeBack = () => {
+        navigate("/")
+    }
+
     return (
         <div className='login'>
             <div className='container'>
                 <div className='row'>
                     <div className='login-left col-12 d-none col-sm-7 d-sm-block d-flex flex-column align-items-center '>
                         <div className='brand'>
-                            <h3>Facebook</h3>
+                            <h3>PHONE-STORE</h3>
                         </div>
                         <div className='detail'>
-                            <p>Facebook helps you connect and share with the people in your life</p>
+                            <p>
+                                THIS IS A PLACE TO HELP YOU BUY THE BEST PHONES AT THE RIGHT PRICE</p>
                         </div>
                     </div>
                     <div className='login-right col-sm-5 col-12 d-flex flex-column py-3 '>
@@ -110,6 +114,7 @@ function Login() {
                         <Link to="#" className="forgot-password mb-3">Forgot your password?</Link>
                         <hr className="mb-3" />
                         <div className="text-center">
+                            <button className='btn btn-warning me-2' onClick={() => handleComeBack()} >Come Back</button>
                             <button className='btn btn-success' onClick={() => handleCreateNewAccount()} >Create new account</button>
                         </div>
                     </div>

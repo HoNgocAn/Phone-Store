@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { fetchUserById, changePassword } from "../../services/userService";
 import { UserContext } from "../../context/UserContext";
 import { toast } from "react-toastify";
+import { set } from 'lodash';
 
 function ModalchangePassword(props) {
 
@@ -16,7 +17,9 @@ function ModalchangePassword(props) {
 
     const [userById, setUserById] = useState({})
     const [newPassword, setNewPassword] = useState("");
+    const [checkPassword, setCheckPassword] = useState("");
     const [validInput, setValidInput] = useState(true);
+    const [validPassword, setValidPassword] = useState(true)
 
     useEffect(() => {
         getUserById(id);
@@ -35,6 +38,9 @@ function ModalchangePassword(props) {
 
     const handleClose = () => {
         props.setIsShowModal(false);
+        setValidInput(true)
+        setValidPassword(true)
+        setNewPassword("")
     };
 
     const handleChange = async () => {
@@ -42,6 +48,14 @@ function ModalchangePassword(props) {
             if (!validateInput()) {
                 return;
             }
+
+            const isCheck = newPassword === checkPassword;
+            setValidPassword(isCheck);
+
+            if (!isCheck) {
+                return;
+            }
+
             let rs = await changePassword(newPassword, id);
             if (rs && rs.EC === 0) {
                 toast.success(rs.EM)
@@ -54,6 +68,11 @@ function ModalchangePassword(props) {
 
     const handleOnChangeInput = (value) => {
         setNewPassword(value)
+    }
+
+
+    const handleCheckPassword = (value) => {
+        setCheckPassword(value)
     }
 
 
@@ -76,11 +95,7 @@ function ModalchangePassword(props) {
                 <Modal.Body>
                     <div className="content-body row">
                         <h5>Change Password</h5>
-                        {/* <div className="col-12 col-sm-6 form-group">
-                            <label>Old password (<span className="red" >*</span>) </label>
-                            <input className="form-control" type="password" placeholder="Enter Email"
-                            />
-                        </div> */}
+
 
                         <div className="col-12 col-sm-6 form-group">
                             <label>New password (<span className="red" >*</span>) </label>
@@ -88,6 +103,13 @@ function ModalchangePassword(props) {
                                 onChange={(event) => handleOnChangeInput(event.target.value)}
                             />
                             {!validInput && <span className="text-danger">Password can't be left blank</span>}
+                        </div>
+
+                        <div className="col-12 col-sm-6 form-group">
+                            <label>Re-enter the new password(<span className="red" >*</span>) </label>
+                            <input className="form-control" type="password" placeholder="..." onChange={(event) => handleCheckPassword(event.target.value)}
+                            />
+                            {!validPassword && <span className="text-danger"> Re-entered password is incorrect</span>}
                         </div>
 
                     </div>

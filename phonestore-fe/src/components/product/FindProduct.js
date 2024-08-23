@@ -61,7 +61,6 @@ function FindProduct(props) {
         try {
             setCurrentPage(1);
             let res = await fetchAllProduct(currentPage, nameSearch, minPrice, maxPrice);
-            console.log(res);
             setListProducts(res.DT.products);
             setTotalPages(Math.ceil(res.DT.totalRows / res.DT.products.length));
             setError("");
@@ -91,12 +90,22 @@ function FindProduct(props) {
     const handleSliderChange = (value) => {
         setMinPrice(value[0]);
         setMaxPrice(value[1]);
+        submitSearch();
     };
+
+    const isLocalImageURL = (url) => {
+        return url.startsWith('http');
+    };
+
+    const toAbsoluteURL = (url) => {
+        return `http://localhost:8080/images/${url}`;
+    };
+
 
 
     return (
         <div className='container mt-3'>
-            <h1>Đây là tìm kiếm</h1>
+            <h3>Please search for the product you want</h3>
             <div className="input-find" >
                 <form style={{ width: "30%", alignContent: "center" }} className="input-group mb-3 mb-md-2 "
                     role="search">
@@ -138,9 +147,9 @@ function FindProduct(props) {
             <div className="row row-1-home ">
                 {listProducts && listProducts.length > 0 ? (
                     listProducts.map(item =>
-                        <div key={item.id} className="col-12 col-lg-4 mt-4">
+                        <div key={item.id} className="col-12 col-lg-3 mt-3">
                             <div className="card" style={{ width: "300px" }}>
-                                <img className="card-img-top" src={item.image} alt="Card image"
+                                <img className="card-img-top" src={isLocalImageURL(item.image) ? item.image : toAbsoluteURL(item.image)} alt="Card image"
                                     height="300"
                                     width="100" />
                                 <div className="card-body">

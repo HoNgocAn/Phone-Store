@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter } from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
 import { UserProvider } from './context/UserContext';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

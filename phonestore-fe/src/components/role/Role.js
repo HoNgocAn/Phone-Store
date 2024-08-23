@@ -93,7 +93,6 @@ function Role(props) {
     }
 
 
-
     return (
         <div className='role-container'>
             <div className='container'>

@@ -8,7 +8,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 
 function Cart(props) {
-    const { user, cartItems, setCartItems, listProducts, setCartNumber, changeIsPayment } = useContext(UserContext);
+
+    const { user, cartItems, setCartItems, listProducts, setCartNumber, changeIsPayment, changeNumberTotalAmount } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -29,7 +30,8 @@ function Cart(props) {
             arr[i].quantity = newQuantity;  // Cập nhật số lượng bình thường
         }
 
-        setCartItems([...arr]);
+        // Cập nhật state cartItems và lưu vào sessionStorage
+        updateCartStorage([...arr]);
 
         // Tính tổng số lượng sản phẩm trong giỏ hàng
         const newCartCount = arr.reduce((total, item) => total + item.quantity, 0);
@@ -40,12 +42,14 @@ function Cart(props) {
         sessionStorage.setItem(`cartCount_${user.account.username}`, JSON.stringify(newCartCount));
     }
 
+    // Cập nhật giỏ hàng và lưu vào sessionStorage
     const updateCartStorage = (items) => {
         sessionStorage.setItem(`cartItems_${user.account.username}`, JSON.stringify(items));
         setCartItems(items);
     }
 
     const removeProduct = (product) => {
+
         const updatedCartItems = cartItems.filter(p => p.id !== product.id);
 
         // Cập nhật cartItems
@@ -63,40 +67,49 @@ function Cart(props) {
         props.setIsShowModal(false);
     };
 
-    const totalAmount = cartItems.reduce((total, product) => {
+    const totalAmountCard = cartItems.reduce((total, product) => {
         return total + (product.price * product.quantity);
     }, 0);
 
-    console.log(user.account);
+    useEffect(() => {
+        changeNumberTotalAmount(totalAmountCard);
+    }, [totalAmountCard, changeNumberTotalAmount]);
+
+
+    // const handlePay = async () => {
+
+    //     const orderData = {
+    //         userId: user.account.id, // ID của người dùng hiện tại
+    //         cartItems: cartItems.map(item => ({
+    //             id: item.id,
+    //             quantity: item.quantity,
+    //             price: item.price
+    //         })),
+    //         totalAmount
+    //     };
+
+    //     try {
+    //         const response = await createNewOrder(orderData);
+    //         if (response) {
+    //             toast.success("Added successfully");
+    //             setCartItems([]);
+    //             setCartNumber(0);
+    //             sessionStorage.setItem(`cartCount_${user.account.username}`, 0);
+    //             sessionStorage.setItem(`cartItems_${user.account.username}`, []);
+    //             handleClose();
+    //             changeIsPayment(true);
+    //         }
+    //     } catch (error) {
+    //         console.error('Failed to create order:', error);
+    //     }
+    // };
 
     const handlePay = async () => {
-
-
-        const orderData = {
-            userId: user.account.id, // ID của người dùng hiện tại
-            cartItems: cartItems.map(item => ({
-                id: item.id,
-                quantity: item.quantity,
-                price: item.price
-            })),
-            totalAmount
-        };
-
-        try {
-            const response = await createNewOrder(orderData);
-            if (response) {
-                toast.success("Added successfully");
-                setCartItems([]);
-                setCartNumber(0);
-                sessionStorage.setItem(`cartCount_${user.account.username}`, 0);
-                sessionStorage.setItem(`cartItems_${user.account.username}`, []);
-                handleClose();
-                changeIsPayment(true);
-            }
-        } catch (error) {
-            console.error('Failed to create order:', error);
-        }
+        navigate("/check-out");
+        handleClose();
+        changeIsPayment(true);
     };
+
 
     return (
         <div>
@@ -150,7 +163,7 @@ function Cart(props) {
                                 </tbody>
                             </table>
                             <div className="text-end mt-3" style={{ marginRight: "70px" }}>
-                                <h5>Total amount of all: {totalAmount} USD</h5>
+                                <h5>Total amount of all: {totalAmountCard} USD</h5>
                             </div>
                         </div>
                     </div>
@@ -160,7 +173,7 @@ function Cart(props) {
                         Close
                     </Button>
                     <Button variant="primary" onClick={() => handlePay()} >
-                        Pay
+                        Check Out
                     </Button>
                 </Modal.Footer>
             </Modal>

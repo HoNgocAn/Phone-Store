@@ -1,0 +1,32 @@
+.container.detail-product {
+    display: flex;
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    min-height: 100vh;
+    /* Chiều cao tối thiểu của container là 100% chiều cao của viewport */
+
+    .card {
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .card-img-top {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .modal-content {
+        border-radius: 8px;
+    }
+
+    .item-cart {
+        cursor: pointer;
+
+        &:hover {
+            color: #ff9800;
+        }
+    }
+}
